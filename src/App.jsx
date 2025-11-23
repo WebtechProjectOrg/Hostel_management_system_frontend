@@ -61,6 +61,7 @@ export default function App() {
   const [showLanding, setShowLanding] = useState(true);
 
   const handleLoginSuccess = (user) => {
+    // user.role should be "student" or "admin" from LoginPage
     setCurrentUser(user);
     setCurrentSection("dashboard");
   };
@@ -106,6 +107,14 @@ export default function App() {
     );
   };
 
+  // ---------- role-based filtering ----------
+  const isAdmin = currentUser?.role === "admin";
+
+  // Admin sees all complaints, student only sees their own
+  const visibleComplaints = isAdmin
+    ? complaints
+    : complaints.filter((c) => c.createdBy === currentUser?.email);
+
   // 1) LANDING PAGE (before login)
   if (!currentUser && showLanding) {
     return <LandingPage onGetStarted={() => setShowLanding(false)} />;
@@ -134,6 +143,7 @@ export default function App() {
         userName={currentUser.displayName}
         userInitials={currentUser.initials}
         onLogout={handleLogout}
+        onProfileClick={() => setCurrentSection("profile")} // avatar opens Profile
       />
 
       <Sidebar
@@ -146,17 +156,20 @@ export default function App() {
           {currentSection === "dashboard" && (
             <DashboardOverview
               dashboardHeading={DASHBOARD_HEADING}
-              complaints={complaints}
+              complaints={visibleComplaints}
             />
           )}
 
           {currentSection === "profile" && (
-            <ProfileSection complaints={complaints} currentUser={currentUser} />
+            <ProfileSection
+              complaints={visibleComplaints}
+              currentUser={currentUser}
+            />
           )}
 
           {currentSection === "complaints" && (
             <ComplaintsSection
-              complaints={complaints}
+              complaints={visibleComplaints}
               currentUser={currentUser}
               onOpenModal={() => setComplaintModalOpen(true)}
               onDelete={handleDeleteComplaint}
@@ -167,13 +180,13 @@ export default function App() {
           {currentSection === "staff" && <StaffSection />}
 
           {currentSection === "comments" && (
-            <CommentsSection complaints={complaints} />
+            <CommentsSection complaints={visibleComplaints} />
           )}
 
           {currentSection === "attachments" && <AttachmentsSection />}
 
           {currentSection === "categories" && (
-            <CategoriesSection complaints={complaints} />
+            <CategoriesSection complaints={visibleComplaints} />
           )}
         </div>
       </main>

@@ -5,6 +5,7 @@ export default function Navbar({
   userName,
   userInitials,
   onLogout,
+  onProfileClick,
 }) {
   return (
     <nav className="bg-white shadow-sm border-b border-slate-200">
@@ -27,9 +28,17 @@ export default function Navbar({
               {userName}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-semibold text-white shadow">
+
+          {/* Avatar = open profile */}
+          <button
+            type="button"
+            onClick={onProfileClick}
+            className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-semibold text-white shadow focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white"
+            title="View profile"
+          >
             {userInitials}
-          </div>
+          </button>
+
           <button
             type="button"
             onClick={onLogout}

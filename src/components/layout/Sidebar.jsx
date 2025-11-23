@@ -2,7 +2,7 @@ import React from "react";
 
 const items = [
   { key: "dashboard", label: "Dashboard", icon: "home" },
-  { key: "profile", label: "Profile", icon: "user" },
+  // profile removed from here
   { key: "complaints", label: "Complaints", icon: "clipboard" },
   { key: "staff", label: "Staff", icon: "users" },
   { key: "comments", label: "Comments", icon: "chat" },
