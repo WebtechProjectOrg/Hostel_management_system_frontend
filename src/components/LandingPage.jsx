@@ -4,7 +4,7 @@ import kleLogo from "../assets/kle-logo.png"; // logo path
 export default function LandingPage({ onGetStarted }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 flex items-center justify-center px-4">
-      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center text-white">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center text-white">
         {/* LEFT: University + Hostel text / CTA */}
         <div>
           {/* KLE logo + university name */}
