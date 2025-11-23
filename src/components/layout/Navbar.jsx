@@ -29,7 +29,7 @@ export default function Navbar({
             </span>
           </div>
 
-          {/* Avatar = open profile */}
+          {/* Avatar opens Profile */}
           <button
             type="button"
             onClick={onProfileClick}
